@@ -1,0 +1,55 @@
+<div class="row">
+    <h3>Listagem de posts</h3>
+    <div class="col-md-12">
+        <app-button color="primary" routerLink="/posts/create">
+            <app-glyph icon="plus"></app-glyph>
+            Criar
+        </app-button>
+    </div>
+    <br/><br/>
+    <div class="col-md-12" *ngIf="message">
+        <app-alert [close]="true" [timeout]="4000">{{message}}</app-alert>
+    </div>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let post of posts;let i = index">
+            <td>{{post.id}}</td>
+            <td>{{post.title}}</td>
+            <td>{{post.body}}</td>
+            <td>
+                <a [routerLink]="['/posts',post.id,'edit']">
+                    <app-glyph icon="pencil"></app-glyph>
+                    Edit
+                </a> |
+                <a href="javascript:void(0)" (click)="openModal(post)">
+                    <app-glyph icon="trash"></app-glyph>
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <app-modal>
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Mensagem de confirmação</h4>
+        </div>
+        <div class="modal-body" *ngIf="postToDelete">
+            <p>Deseja excluir este post <strong>{{postToDelete.title}}</strong>?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" (click)="destroy()">Delete</button>
+        </div>
+    </app-modal>
+</div>

@@ -1,0 +1,9 @@
+<div [className]="'alert alert-'+color" ngClass="{'alert-dismissible': close}" role="alert" #divAlert>
+    <button *ngIf="close"
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"><span aria-hidden="true">×</span>
+    </button>
+    <ng-content></ng-content>
+</div>
